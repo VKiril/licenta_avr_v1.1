@@ -1,0 +1,772 @@
+
+licence.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000040c  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  0000040c  000004a0  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000001d  00800060  00800060  000004a0  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  000004a0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000097  00000000  00000000  00000b6c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      0000002f  00000000  00000000  00000c03  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 000000c0  00000000  00000000  00000c32  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   000004ba  00000000  00000000  00000cf2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000180  00000000  00000000  000011ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   000002aa  00000000  00000000  0000132c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000264  00000000  00000000  000015d8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    0000025a  00000000  00000000  0000183c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    0000046a  00000000  00000000  00001a96  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 000000b0  00000000  00000000  00001f00  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 48 00 	jmp	0x90	; 0x90 <__vector_1>
+   8:	0c 94 56 00 	jmp	0xac	; 0xac <__vector_2>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__vector_9>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 24 01 	jmp	0x248	; 0x248 <__vector_11>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 9d 01 	jmp	0x33a	; 0x33a <__vector_13>
+  38:	0c 94 74 01 	jmp	0x2e8	; 0x2e8 <__vector_14>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	ad 37       	cpi	r26, 0x7D	; 125
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 fb 01 	call	0x3f6	; 0x3f6 <main>
+  74:	0c 94 04 02 	jmp	0x408	; 0x408 <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <__vector_9>:
+	startFlag = 1 ; 
+	adcConversion();
+	UDR = 0xFC;	
+}
+
+ISR(TIMER0_OVF_vect){
+  7c:	1f 92       	push	r1
+  7e:	0f 92       	push	r0
+  80:	0f b6       	in	r0, 0x3f	; 63
+  82:	0f 92       	push	r0
+  84:	11 24       	eor	r1, r1
+	//
+}
+  86:	0f 90       	pop	r0
+  88:	0f be       	out	0x3f, r0	; 63
+  8a:	0f 90       	pop	r0
+  8c:	1f 90       	pop	r1
+  8e:	18 95       	reti
+
+00000090 <__vector_1>:
+
+ISR(INT0_vect){
+  90:	1f 92       	push	r1
+  92:	0f 92       	push	r0
+  94:	0f b6       	in	r0, 0x3f	; 63
+  96:	0f 92       	push	r0
+  98:	11 24       	eor	r1, r1
+  9a:	8f 93       	push	r24
+	PORTB = 0xFF;
+  9c:	8f ef       	ldi	r24, 0xFF	; 255
+  9e:	88 bb       	out	0x18, r24	; 24
+	//send();
+}
+  a0:	8f 91       	pop	r24
+  a2:	0f 90       	pop	r0
+  a4:	0f be       	out	0x3f, r0	; 63
+  a6:	0f 90       	pop	r0
+  a8:	1f 90       	pop	r1
+  aa:	18 95       	reti
+
+000000ac <__vector_2>:
+
+ISR(INT1_vect){
+  ac:	1f 92       	push	r1
+  ae:	0f 92       	push	r0
+  b0:	0f b6       	in	r0, 0x3f	; 63
+  b2:	0f 92       	push	r0
+  b4:	11 24       	eor	r1, r1
+	PORTB = 0x00;
+  b6:	18 ba       	out	0x18, r1	; 24
+	counter = 0 ;
+  b8:	10 92 7c 00 	sts	0x007C, r1
+  bc:	10 92 7b 00 	sts	0x007B, r1
+}
+  c0:	0f 90       	pop	r0
+  c2:	0f be       	out	0x3f, r0	; 63
+  c4:	0f 90       	pop	r0
+  c6:	1f 90       	pop	r1
+  c8:	18 95       	reti
+
+000000ca <initArray>:
+	}
+}
+
+void initArray(char array){
+	//if(array == OUT_COMMING_ARRAY_ALIAS ){
+		outCommingArray [OUT_LENGTH_BIT_POS] = OUT_COMMING_ARRAY_LENGTH ;
+  ca:	8a e0       	ldi	r24, 0x0A	; 10
+  cc:	80 93 69 00 	sts	0x0069, r24
+		outCommingArray [OUT_STX1_POS]  = STX ; 
+  d0:	80 e3       	ldi	r24, 0x30	; 48
+  d2:	80 93 67 00 	sts	0x0067, r24
+		outCommingArray [OUT_STX2_POS]  = STX ; 
+  d6:	80 93 68 00 	sts	0x0068, r24
+		outCommingArray [OUT_ETX1_POS]  = ETX ; 
+  da:	81 e3       	ldi	r24, 0x31	; 49
+  dc:	80 93 6f 00 	sts	0x006F, r24
+		outCommingArray [OUT_ETX2_POS]  = ETX ; 
+  e0:	80 93 70 00 	sts	0x0070, r24
+  e4:	08 95       	ret
+
+000000e6 <clearCommand>:
+	}
+		
+	
+}
+void clearCommand(void){
+	firstCommingBitFlag = 0 ;
+  e6:	10 92 63 00 	sts	0x0063, r1
+	secondCommingBitFlag = 0;
+  ea:	10 92 62 00 	sts	0x0062, r1
+	consecutiveCounter = 0 ;
+  ee:	10 92 61 00 	sts	0x0061, r1
+	consecutiveCounterBuffer = 0 ;
+  f2:	10 92 60 00 	sts	0x0060, r1
+  f6:	08 95       	ret
+
+000000f8 <stopConversion>:
+	startFlag = 1 ; 
+	send();
+}
+
+void stopConversion(void){
+	UCSRB &=~(1<<UDRIE);
+  f8:	55 98       	cbi	0x0a, 5	; 10
+	startFlag = 0 ; 
+  fa:	10 92 7a 00 	sts	0x007A, r1
+  fe:	08 95       	ret
+
+00000100 <send>:
+}
+
+void send(void)
+{
+	if( acdConverted == 1 )
+ 100:	80 91 66 00 	lds	r24, 0x0066
+ 104:	81 30       	cpi	r24, 0x01	; 1
+ 106:	c1 f4       	brne	.+48     	; 0x138 <send+0x38>
+	{
+		if(counter < OUT_COMMING_ARRAY_LENGTH){
+ 108:	80 91 7b 00 	lds	r24, 0x007B
+ 10c:	90 91 7c 00 	lds	r25, 0x007C
+ 110:	8a 30       	cpi	r24, 0x0A	; 10
+ 112:	91 05       	cpc	r25, r1
+ 114:	64 f4       	brge	.+24     	; 0x12e <send+0x2e>
+			UCSRB |=(1<<TXCIE);
+ 116:	56 9a       	sbi	0x0a, 6	; 10
+			UDR = outCommingArray[counter] ;			
+ 118:	fc 01       	movw	r30, r24
+ 11a:	e9 59       	subi	r30, 0x99	; 153
+ 11c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 11e:	20 81       	ld	r18, Z
+ 120:	2c b9       	out	0x0c, r18	; 12
+			counter++;
+ 122:	01 96       	adiw	r24, 0x01	; 1
+ 124:	90 93 7c 00 	sts	0x007C, r25
+ 128:	80 93 7b 00 	sts	0x007B, r24
+ 12c:	08 95       	ret
+		} else {
+			UCSRB &=~(1<<TXCIE);
+ 12e:	56 98       	cbi	0x0a, 6	; 10
+			counter = 0;
+ 130:	10 92 7c 00 	sts	0x007C, r1
+ 134:	10 92 7b 00 	sts	0x007B, r1
+ 138:	08 95       	ret
+
+0000013a <startConversion>:
+		inCommingArray[i] = 0 ;
+	}
+}
+
+void startConversion(char cmd){
+	UCSRC |= (1<<URSEL);
+ 13a:	80 b5       	in	r24, 0x20	; 32
+ 13c:	80 68       	ori	r24, 0x80	; 128
+ 13e:	80 bd       	out	0x20, r24	; 32
+	startFlag = 1 ; 
+ 140:	81 e0       	ldi	r24, 0x01	; 1
+ 142:	80 93 7a 00 	sts	0x007A, r24
+	send();
+ 146:	0e 94 80 00 	call	0x100	; 0x100 <send>
+ 14a:	08 95       	ret
+
+0000014c <receiveArray>:
+char consecutiveCounterBuffer = 0 ;
+
+
+void receiveArray(char bit){
+	
+	consecutiveCounter ++ ; 
+ 14c:	90 91 61 00 	lds	r25, 0x0061
+ 150:	9f 5f       	subi	r25, 0xFF	; 255
+ 152:	90 93 61 00 	sts	0x0061, r25
+	PORTC = inCommingArray[IN_CMD_POS];
+ 156:	90 91 74 00 	lds	r25, 0x0074
+ 15a:	95 bb       	out	0x15, r25	; 21
+	
+	if(firstCommingBitFlag == 0 && bit == ETX ){
+ 15c:	40 91 63 00 	lds	r20, 0x0063
+ 160:	41 11       	cpse	r20, r1
+ 162:	0f c0       	rjmp	.+30     	; 0x182 <receiveArray+0x36>
+ 164:	81 33       	cpi	r24, 0x31	; 49
+ 166:	09 f0       	breq	.+2      	; 0x16a <receiveArray+0x1e>
+ 168:	64 c0       	rjmp	.+200    	; 0x232 <receiveArray+0xe6>
+		firstCommingBit = bit ;		
+ 16a:	80 93 65 00 	sts	0x0065, r24
+		firstCommingBitFlag = 1 ; 
+ 16e:	81 e0       	ldi	r24, 0x01	; 1
+ 170:	80 93 63 00 	sts	0x0063, r24
+		consecutiveCounterBuffer = consecutiveCounter ; 
+ 174:	80 91 61 00 	lds	r24, 0x0061
+ 178:	80 93 60 00 	sts	0x0060, r24
+		PORTB = 0b11111000;
+ 17c:	88 ef       	ldi	r24, 0xF8	; 248
+ 17e:	88 bb       	out	0x18, r24	; 24
+		return ; 
+ 180:	08 95       	ret
+	}
+	
+	if(secondCommingBitFlag == 0 && bit == ETX && consecutiveCounterBuffer == (consecutiveCounter -1)  ){
+ 182:	90 91 62 00 	lds	r25, 0x0062
+ 186:	91 11       	cpse	r25, r1
+ 188:	22 c0       	rjmp	.+68     	; 0x1ce <receiveArray+0x82>
+ 18a:	81 33       	cpi	r24, 0x31	; 49
+ 18c:	09 f0       	breq	.+2      	; 0x190 <receiveArray+0x44>
+ 18e:	58 c0       	rjmp	.+176    	; 0x240 <receiveArray+0xf4>
+ 190:	20 91 60 00 	lds	r18, 0x0060
+ 194:	30 e0       	ldi	r19, 0x00	; 0
+ 196:	80 91 61 00 	lds	r24, 0x0061
+ 19a:	90 e0       	ldi	r25, 0x00	; 0
+ 19c:	01 97       	sbiw	r24, 0x01	; 1
+ 19e:	28 17       	cp	r18, r24
+ 1a0:	39 07       	cpc	r19, r25
+ 1a2:	09 f0       	breq	.+2      	; 0x1a6 <receiveArray+0x5a>
+ 1a4:	4d c0       	rjmp	.+154    	; 0x240 <receiveArray+0xf4>
+		secondCommingBit = bit ; 
+ 1a6:	81 e3       	ldi	r24, 0x31	; 49
+ 1a8:	80 93 64 00 	sts	0x0064, r24
+		secondCommingBitFlag = 1; 
+ 1ac:	81 e0       	ldi	r24, 0x01	; 1
+ 1ae:	80 93 62 00 	sts	0x0062, r24
+		PORTB = 0b11111100;
+ 1b2:	8c ef       	ldi	r24, 0xFC	; 252
+ 1b4:	88 bb       	out	0x18, r24	; 24
+		return ;  		
+ 1b6:	08 95       	ret
+	} 
+	
+	if(firstCommingBitFlag == 1 && secondCommingBitFlag == 0){
+		firstCommingBitFlag = 0 ; 
+ 1b8:	10 92 63 00 	sts	0x0063, r1
+		secondCommingBitFlag = 0; 
+ 1bc:	10 92 62 00 	sts	0x0062, r1
+		consecutiveCounter = 0 ; 
+ 1c0:	10 92 61 00 	sts	0x0061, r1
+		consecutiveCounterBuffer = 0 ; 
+ 1c4:	10 92 60 00 	sts	0x0060, r1
+		PORTB = 0b10101010 ; 
+ 1c8:	8a ea       	ldi	r24, 0xAA	; 170
+ 1ca:	88 bb       	out	0x18, r24	; 24
+		return ; 
+ 1cc:	08 95       	ret
+	}
+	
+	if( secondCommingBitFlag == 1 && firstCommingBitFlag == 1 ){
+ 1ce:	91 30       	cpi	r25, 0x01	; 1
+ 1d0:	81 f5       	brne	.+96     	; 0x232 <receiveArray+0xe6>
+ 1d2:	41 30       	cpi	r20, 0x01	; 1
+ 1d4:	71 f5       	brne	.+92     	; 0x232 <receiveArray+0xe6>
+		PORTB = 0b11111110;
+ 1d6:	9e ef       	ldi	r25, 0xFE	; 254
+ 1d8:	98 bb       	out	0x18, r25	; 24
+		for (int i = 0 ; i < INCOMMING_ARRAY_LENGTH-2 ; i ++ ){
+			inCommingArray[i+1] = inCommingArray[i] ;		
+ 1da:	e1 e7       	ldi	r30, 0x71	; 113
+ 1dc:	f0 e0       	ldi	r31, 0x00	; 0
+ 1de:	90 81       	ld	r25, Z
+ 1e0:	90 93 72 00 	sts	0x0072, r25
+ 1e4:	90 93 73 00 	sts	0x0073, r25
+ 1e8:	90 93 74 00 	sts	0x0074, r25
+ 1ec:	90 93 75 00 	sts	0x0075, r25
+ 1f0:	90 93 76 00 	sts	0x0076, r25
+		}
+		
+		inCommingArray[0] = bit ; 
+ 1f4:	80 83       	st	Z, r24
+	
+		/*for(int i = 1 ; i < INCOMMING_ARRAY_LENGTH-2 ; i++){
+			crc += inCommingArray[i] ; 
+		}*/
+		
+		if(	inCommingArray[IN_STX1_POS] == STX && inCommingArray[IN_STX2_POS] == STX && consecutiveCounter == INCOMMING_ARRAY_LENGTH  ){
+ 1f6:	80 33       	cpi	r24, 0x30	; 48
+ 1f8:	e1 f4       	brne	.+56     	; 0x232 <receiveArray+0xe6>
+ 1fa:	90 33       	cpi	r25, 0x30	; 48
+ 1fc:	d1 f4       	brne	.+52     	; 0x232 <receiveArray+0xe6>
+ 1fe:	80 91 61 00 	lds	r24, 0x0061
+ 202:	87 30       	cpi	r24, 0x07	; 7
+ 204:	b1 f4       	brne	.+44     	; 0x232 <receiveArray+0xe6>
+			
+			PORTB = inCommingArray[IN_CMD_POS]  ;
+ 206:	98 bb       	out	0x18, r25	; 24
+			consecutiveCounter = 0 ; 
+ 208:	10 92 61 00 	sts	0x0061, r1
+			if( inCommingArray[IN_CMD_POS] == START_CONVERSION_AND_TRANSMITING ){
+ 20c:	92 33       	cpi	r25, 0x32	; 50
+ 20e:	41 f4       	brne	.+16     	; 0x220 <receiveArray+0xd4>
+				PORTB = 0x0f;
+ 210:	8f e0       	ldi	r24, 0x0F	; 15
+ 212:	88 bb       	out	0x18, r24	; 24
+				startConversion(inCommingArray[IN_CMD_POS]);
+ 214:	89 2f       	mov	r24, r25
+ 216:	0e 94 9d 00 	call	0x13a	; 0x13a <startConversion>
+				clearCommand();
+ 21a:	0e 94 73 00 	call	0xe6	; 0xe6 <clearCommand>
+				return ; 
+ 21e:	08 95       	ret
+			}
+			if( inCommingArray[IN_CMD_POS] == STOP_CONVERSION_AND_TRANSMITING  ){
+ 220:	93 33       	cpi	r25, 0x33	; 51
+ 222:	89 f4       	brne	.+34     	; 0x246 <receiveArray+0xfa>
+				PORTB = 0xf0;
+ 224:	80 ef       	ldi	r24, 0xF0	; 240
+ 226:	88 bb       	out	0x18, r24	; 24
+				stopConversion();
+ 228:	0e 94 7c 00 	call	0xf8	; 0xf8 <stopConversion>
+				clearCommand();
+ 22c:	0e 94 73 00 	call	0xe6	; 0xe6 <clearCommand>
+				return ; 
+ 230:	08 95       	ret
+		} 
+		
+		
+		
+	}
+	if(  consecutiveCounter >= INCOMMING_ARRAY_LENGTH ){
+ 232:	80 91 61 00 	lds	r24, 0x0061
+ 236:	87 30       	cpi	r24, 0x07	; 7
+ 238:	30 f0       	brcs	.+12     	; 0x246 <receiveArray+0xfa>
+		clearCommand();
+ 23a:	0e 94 73 00 	call	0xe6	; 0xe6 <clearCommand>
+ 23e:	08 95       	ret
+		secondCommingBitFlag = 1; 
+		PORTB = 0b11111100;
+		return ;  		
+	} 
+	
+	if(firstCommingBitFlag == 1 && secondCommingBitFlag == 0){
+ 240:	41 30       	cpi	r20, 0x01	; 1
+ 242:	b9 f7       	brne	.-18     	; 0x232 <receiveArray+0xe6>
+ 244:	b9 cf       	rjmp	.-142    	; 0x1b8 <receiveArray+0x6c>
+ 246:	08 95       	ret
+
+00000248 <__vector_11>:
+	send();
+	//char temp = UDR ; 
+	//UDR = temp ; 
+}
+
+ISR(USART_RXC_vect){
+ 248:	1f 92       	push	r1
+ 24a:	0f 92       	push	r0
+ 24c:	0f b6       	in	r0, 0x3f	; 63
+ 24e:	0f 92       	push	r0
+ 250:	11 24       	eor	r1, r1
+ 252:	2f 93       	push	r18
+ 254:	3f 93       	push	r19
+ 256:	4f 93       	push	r20
+ 258:	5f 93       	push	r21
+ 25a:	6f 93       	push	r22
+ 25c:	7f 93       	push	r23
+ 25e:	8f 93       	push	r24
+ 260:	9f 93       	push	r25
+ 262:	af 93       	push	r26
+ 264:	bf 93       	push	r27
+ 266:	ef 93       	push	r30
+ 268:	ff 93       	push	r31
+	PORTA = UDR ; 
+ 26a:	8c b1       	in	r24, 0x0c	; 12
+ 26c:	8b bb       	out	0x1b, r24	; 27
+	receiveArray(UDR);
+ 26e:	8c b1       	in	r24, 0x0c	; 12
+ 270:	0e 94 a6 00 	call	0x14c	; 0x14c <receiveArray>
+	//char temp = UDR ; 
+	//UDR  = temp ; 
+}
+ 274:	ff 91       	pop	r31
+ 276:	ef 91       	pop	r30
+ 278:	bf 91       	pop	r27
+ 27a:	af 91       	pop	r26
+ 27c:	9f 91       	pop	r25
+ 27e:	8f 91       	pop	r24
+ 280:	7f 91       	pop	r23
+ 282:	6f 91       	pop	r22
+ 284:	5f 91       	pop	r21
+ 286:	4f 91       	pop	r20
+ 288:	3f 91       	pop	r19
+ 28a:	2f 91       	pop	r18
+ 28c:	0f 90       	pop	r0
+ 28e:	0f be       	out	0x3f, r0	; 63
+ 290:	0f 90       	pop	r0
+ 292:	1f 90       	pop	r1
+ 294:	18 95       	reti
+
+00000296 <adcConversion>:
+char acdConverted = 0; 
+void adcConversion(void){	
+	DDRC = 0XFF;
+ 296:	8f ef       	ldi	r24, 0xFF	; 255
+ 298:	84 bb       	out	0x14, r24	; 20
+	if(startFlag == 1){
+ 29a:	80 91 7a 00 	lds	r24, 0x007A
+ 29e:	81 30       	cpi	r24, 0x01	; 1
+ 2a0:	01 f5       	brne	.+64     	; 0x2e2 <adcConversion+0x4c>
+		PORTC=0b11111110;
+ 2a2:	8e ef       	ldi	r24, 0xFE	; 254
+ 2a4:	85 bb       	out	0x15, r24	; 21
+		acdConverted = 1 ;
+ 2a6:	81 e0       	ldi	r24, 0x01	; 1
+ 2a8:	80 93 66 00 	sts	0x0066, r24
+		lowerBit  = ADCL ;
+ 2ac:	24 b1       	in	r18, 0x04	; 4
+ 2ae:	20 93 78 00 	sts	0x0078, r18
+		higgerBit = ADCH;
+ 2b2:	85 b1       	in	r24, 0x05	; 5
+ 2b4:	80 93 79 00 	sts	0x0079, r24
+		
+		int crc = lowerBit + higgerBit + inCommingArray[IN_CMD_POS] + OUT_COMMING_ARRAY_LENGTH  ;		
+ 2b8:	30 91 74 00 	lds	r19, 0x0074
+		
+		outCommingArray [OUT_CMD_POS ] = inCommingArray[IN_CMD_POS] ;
+ 2bc:	30 93 6a 00 	sts	0x006A, r19
+		outCommingArray [OUT_BIT0_POS] = lowerBit ;
+ 2c0:	20 93 6b 00 	sts	0x006B, r18
+		outCommingArray [OUT_BIT1_POS] = higgerBit ;
+ 2c4:	80 93 6c 00 	sts	0x006C, r24
+		outCommingArray [OUT_CRCH_POS] = (char) crc >> 8 ;
+ 2c8:	10 92 6e 00 	sts	0x006E, r1
+		PORTC=0b11111110;
+		acdConverted = 1 ;
+		lowerBit  = ADCL ;
+		higgerBit = ADCH;
+		
+		int crc = lowerBit + higgerBit + inCommingArray[IN_CMD_POS] + OUT_COMMING_ARRAY_LENGTH  ;		
+ 2cc:	90 e0       	ldi	r25, 0x00	; 0
+ 2ce:	82 0f       	add	r24, r18
+ 2d0:	91 1d       	adc	r25, r1
+ 2d2:	83 0f       	add	r24, r19
+ 2d4:	91 1d       	adc	r25, r1
+ 2d6:	0a 96       	adiw	r24, 0x0a	; 10
+		
+		outCommingArray [OUT_CMD_POS ] = inCommingArray[IN_CMD_POS] ;
+		outCommingArray [OUT_BIT0_POS] = lowerBit ;
+		outCommingArray [OUT_BIT1_POS] = higgerBit ;
+		outCommingArray [OUT_CRCH_POS] = (char) crc >> 8 ;
+		outCommingArray [OUT_CRCL_POS] = (char) crc ;
+ 2d8:	80 93 6d 00 	sts	0x006D, r24
+		
+		send();
+ 2dc:	0e 94 80 00 	call	0x100	; 0x100 <send>
+ 2e0:	08 95       	ret
+	} else {
+		PORTC=0b00000001;
+ 2e2:	81 e0       	ldi	r24, 0x01	; 1
+ 2e4:	85 bb       	out	0x15, r24	; 21
+ 2e6:	08 95       	ret
+
+000002e8 <__vector_14>:
+void stopConversion(void);
+void startConversion(char);
+
+void initArray(char );
+
+ISR(ADC_vect){
+ 2e8:	1f 92       	push	r1
+ 2ea:	0f 92       	push	r0
+ 2ec:	0f b6       	in	r0, 0x3f	; 63
+ 2ee:	0f 92       	push	r0
+ 2f0:	11 24       	eor	r1, r1
+ 2f2:	2f 93       	push	r18
+ 2f4:	3f 93       	push	r19
+ 2f6:	4f 93       	push	r20
+ 2f8:	5f 93       	push	r21
+ 2fa:	6f 93       	push	r22
+ 2fc:	7f 93       	push	r23
+ 2fe:	8f 93       	push	r24
+ 300:	9f 93       	push	r25
+ 302:	af 93       	push	r26
+ 304:	bf 93       	push	r27
+ 306:	ef 93       	push	r30
+ 308:	ff 93       	push	r31
+	startFlag = 1 ; 
+ 30a:	81 e0       	ldi	r24, 0x01	; 1
+ 30c:	80 93 7a 00 	sts	0x007A, r24
+	adcConversion();
+ 310:	0e 94 4b 01 	call	0x296	; 0x296 <adcConversion>
+	UDR = 0xFC;	
+ 314:	8c ef       	ldi	r24, 0xFC	; 252
+ 316:	8c b9       	out	0x0c, r24	; 12
+}
+ 318:	ff 91       	pop	r31
+ 31a:	ef 91       	pop	r30
+ 31c:	bf 91       	pop	r27
+ 31e:	af 91       	pop	r26
+ 320:	9f 91       	pop	r25
+ 322:	8f 91       	pop	r24
+ 324:	7f 91       	pop	r23
+ 326:	6f 91       	pop	r22
+ 328:	5f 91       	pop	r21
+ 32a:	4f 91       	pop	r20
+ 32c:	3f 91       	pop	r19
+ 32e:	2f 91       	pop	r18
+ 330:	0f 90       	pop	r0
+ 332:	0f be       	out	0x3f, r0	; 63
+ 334:	0f 90       	pop	r0
+ 336:	1f 90       	pop	r1
+ 338:	18 95       	reti
+
+0000033a <__vector_13>:
+ISR(INT1_vect){
+	PORTB = 0x00;
+	counter = 0 ;
+}
+
+ISR(USART_TXC_vect){
+ 33a:	1f 92       	push	r1
+ 33c:	0f 92       	push	r0
+ 33e:	0f b6       	in	r0, 0x3f	; 63
+ 340:	0f 92       	push	r0
+ 342:	11 24       	eor	r1, r1
+ 344:	2f 93       	push	r18
+ 346:	3f 93       	push	r19
+ 348:	4f 93       	push	r20
+ 34a:	5f 93       	push	r21
+ 34c:	6f 93       	push	r22
+ 34e:	7f 93       	push	r23
+ 350:	8f 93       	push	r24
+ 352:	9f 93       	push	r25
+ 354:	af 93       	push	r26
+ 356:	bf 93       	push	r27
+ 358:	ef 93       	push	r30
+ 35a:	ff 93       	push	r31
+	send();
+ 35c:	0e 94 80 00 	call	0x100	; 0x100 <send>
+	//char temp = UDR ; 
+	//UDR = temp ; 
+}
+ 360:	ff 91       	pop	r31
+ 362:	ef 91       	pop	r30
+ 364:	bf 91       	pop	r27
+ 366:	af 91       	pop	r26
+ 368:	9f 91       	pop	r25
+ 36a:	8f 91       	pop	r24
+ 36c:	7f 91       	pop	r23
+ 36e:	6f 91       	pop	r22
+ 370:	5f 91       	pop	r21
+ 372:	4f 91       	pop	r20
+ 374:	3f 91       	pop	r19
+ 376:	2f 91       	pop	r18
+ 378:	0f 90       	pop	r0
+ 37a:	0f be       	out	0x3f, r0	; 63
+ 37c:	0f 90       	pop	r0
+ 37e:	1f 90       	pop	r1
+ 380:	18 95       	reti
+
+00000382 <ping>:
+		}
+	}
+}
+
+void ping(void){
+	UCSRC |= (1<<URSEL);
+ 382:	80 b5       	in	r24, 0x20	; 32
+ 384:	80 68       	ori	r24, 0x80	; 128
+ 386:	80 bd       	out	0x20, r24	; 32
+	UDR = 0xff;
+ 388:	8f ef       	ldi	r24, 0xFF	; 255
+ 38a:	8c b9       	out	0x0c, r24	; 12
+	UCSRC &= ~(1<<URSEL);
+ 38c:	80 b5       	in	r24, 0x20	; 32
+ 38e:	8f 77       	andi	r24, 0x7F	; 127
+ 390:	80 bd       	out	0x20, r24	; 32
+ 392:	08 95       	ret
+
+00000394 <_portInit>:
+	_ADCinit    ();
+}
+
+void _portInit(void){
+	//adc port
+	PORTA = 0X00;
+ 394:	1b ba       	out	0x1b, r1	; 27
+	DDRA = 0XFF;
+ 396:	8f ef       	ldi	r24, 0xFF	; 255
+ 398:	8a bb       	out	0x1a, r24	; 26
+	
+	//uart port
+	PORTD = 0b00111100;
+ 39a:	9c e3       	ldi	r25, 0x3C	; 60
+ 39c:	92 bb       	out	0x12, r25	; 18
+	DDRD  = 0b11111111;
+ 39e:	81 bb       	out	0x11, r24	; 17
+	
+	//led port
+	PORTB = firstCommingBitFlag;
+ 3a0:	90 91 63 00 	lds	r25, 0x0063
+ 3a4:	98 bb       	out	0x18, r25	; 24
+	DDRB = 0xFF;
+ 3a6:	87 bb       	out	0x17, r24	; 23
+ 3a8:	08 95       	ret
+
+000003aa <_ADCinit>:
+}
+
+void _ADCinit(void){	
+	ADMUX  |= ( 1<<REFS1 ) | ( 1<<REFS0 ) ;//Internal 2.56V Voltage Reference with external capacitor at AREF pin
+ 3aa:	87 b1       	in	r24, 0x07	; 7
+ 3ac:	80 6c       	ori	r24, 0xC0	; 192
+ 3ae:	87 b9       	out	0x07, r24	; 7
+	ADCSRA |= ( 1<<ADEN  ) | ( 1<<ADSC  ) | ( 1<<ADIE ) | ( 1<<ADPS2 ) | ( 1<<ADPS1 ) | ( 1 << ADIF );//Division Factor 64 frequency 125000Hz	
+ 3b0:	86 b1       	in	r24, 0x06	; 6
+ 3b2:	8e 6d       	ori	r24, 0xDE	; 222
+ 3b4:	86 b9       	out	0x06, r24	; 6
+	SFIOR  |= ( 1<<ADTS1 ) | ( 1<<ADTS0 ) ;// trigger Timer/Counter0 Overflow
+ 3b6:	80 b7       	in	r24, 0x30	; 48
+ 3b8:	80 66       	ori	r24, 0x60	; 96
+ 3ba:	80 bf       	out	0x30, r24	; 48
+ 3bc:	08 95       	ret
+
+000003be <_timer1Init>:
+}
+
+void _timer1Init(void){
+	TCCR0 |= ( 1<<CS01)|(1<<CS00);//division factor 64
+ 3be:	83 b7       	in	r24, 0x33	; 51
+ 3c0:	83 60       	ori	r24, 0x03	; 3
+ 3c2:	83 bf       	out	0x33, r24	; 51
+	TIMSK |= ( 1<<TOIE0) ;
+ 3c4:	89 b7       	in	r24, 0x39	; 57
+ 3c6:	81 60       	ori	r24, 0x01	; 1
+ 3c8:	89 bf       	out	0x39, r24	; 57
+	OCR0 = 255 ; 
+ 3ca:	8f ef       	ldi	r24, 0xFF	; 255
+ 3cc:	8c bf       	out	0x3c, r24	; 60
+ 3ce:	08 95       	ret
+
+000003d0 <_uartInit>:
+}
+
+void _uartInit(void){
+	int baud = 12 ;
+	UBRRH = (unsigned char)(baud>>8);
+ 3d0:	10 bc       	out	0x20, r1	; 32
+	UBRRL = (unsigned char) baud;
+ 3d2:	8c e0       	ldi	r24, 0x0C	; 12
+ 3d4:	89 b9       	out	0x09, r24	; 9
+	UCSRB |= (1<<RXCIE)|(1<<TXCIE)|(1<<RXEN)|(1<<TXEN)|(1<<RXB8)|(1<<TXB8)|(0<<UDRIE) ;
+ 3d6:	8a b1       	in	r24, 0x0a	; 10
+ 3d8:	8b 6d       	ori	r24, 0xDB	; 219
+ 3da:	8a b9       	out	0x0a, r24	; 10
+	UCSRC |= (1<<URSEL)|(0<<USBS) |(1<< UCSZ1)|(1<< UCSZ0);//
+ 3dc:	80 b5       	in	r24, 0x20	; 32
+ 3de:	86 68       	ori	r24, 0x86	; 134
+ 3e0:	80 bd       	out	0x20, r24	; 32
+ 3e2:	08 95       	ret
+
+000003e4 <_construct>:
+
+
+
+
+void _construct(void){
+	_portInit   ();
+ 3e4:	0e 94 ca 01 	call	0x394	; 0x394 <_portInit>
+	_uartInit   ();
+ 3e8:	0e 94 e8 01 	call	0x3d0	; 0x3d0 <_uartInit>
+	_timer1Init ();
+ 3ec:	0e 94 df 01 	call	0x3be	; 0x3be <_timer1Init>
+	//_externInterruptInit();
+	_ADCinit    ();
+ 3f0:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_ADCinit>
+ 3f4:	08 95       	ret
+
+000003f6 <main>:
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////     MAIN    //////
+int main(void){
+	
+	_construct();	
+ 3f6:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <_construct>
+	sei();
+ 3fa:	78 94       	sei
+	ping();
+ 3fc:	0e 94 c1 01 	call	0x382	; 0x382 <ping>
+	initArray(OUT_COMMING_ARRAY_ALIAS);
+ 400:	85 e0       	ldi	r24, 0x05	; 5
+ 402:	0e 94 65 00 	call	0xca	; 0xca <initArray>
+ 406:	ff cf       	rjmp	.-2      	; 0x406 <main+0x10>
+
+00000408 <_exit>:
+ 408:	f8 94       	cli
+
+0000040a <__stop_program>:
+ 40a:	ff cf       	rjmp	.-2      	; 0x40a <__stop_program>
